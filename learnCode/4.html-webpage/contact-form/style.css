@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  background: aliceblue;
+}
+
+.container {
+  width: 60vw;
+  margin: 0 auto;
+  padding: 10vh 2vw;
+}
+
+h2 {
+  padding-bottom: 25px;
+}
+
+form {
+  width: 100%;
+  background: blueviolet;
+  box-shadow: 0 0 5px;
+  padding: 20px;
+}
+
+.form-group {
+  padding-bottom: 18px;
+}
+
+.form-group input {
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+textarea#messages {
+  width: 90%;
+  height: 90px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+input#remember {
+  width: inherit;
+}
+
+.btn-center {
+  width: 100%;
+  text-align: center;
+}
+
+button#submit {
+  padding: 10px 20px;
+  color: blueviolet;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
