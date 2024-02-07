@@ -40,25 +40,25 @@ function generateReport() {
     ?>
 
 <table>
-   <thead>
-      <th>Name</th>
-      <th>Roll</th>
-      <th>Action</th>
-   </thead>
+  <thead>
+    <th>Name</th>
+    <th>Roll</th>
+    <th>Action</th>
+  </thead>
 
-   <?php
+  <?php
 foreach ( $students as $student ) {
         ?>
-   <tr>
-      <td><?php printf( "%s %s", $student['fname'], $student['lname'] );?>
-      </td>
-      <td><?php printf( "%s", $student['roll'] );?>
-      </td>
-      <td>
-         <?php printf( "<a href='/?task=edit&id=%s'>Edit</a> | <a href='/?task=delete&id=%s' class='delete'>Delete</a>", $student['id'], $student['id'] );?>
-      </td>
-   </tr>
-   <?php
+  <tr>
+    <td><?php printf( "%s %s", $student['fname'], $student['lname'] );?>
+    </td>
+    <td><?php printf( "%s", $student['roll'] );?>
+    </td>
+    <td>
+      <?php printf( "<a href='/?task=edit&id=%s'>Edit</a> | <a href='/?task=delete&id=%s' class='delete'>Delete</a>", $student['id'], $student['id'] );?>
+    </td>
+  </tr>
+  <?php
 }
     ?>
 </table>
@@ -173,4 +173,17 @@ function removeStudent( $id ) {
     $serializeData = serialize( $students );
     file_put_contents( DB_NAME, $serializeData, LOCK_EX );
 
+}
+
+// Set user role
+function isAdmin() {
+    return ( "admin" == $_SESSION['role'] );
+}
+
+function isEditor() {
+    return ( "editor" == $_SESSION['role'] );
+}
+
+function hasPrivilege() {
+    return ( isAdmin() || isEditor() );
 }
