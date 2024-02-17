@@ -1,4 +1,6 @@
-<?php require_once "includes/config.php";?>
+<?php
+require_once "includes/config.php";
+?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
@@ -15,11 +17,22 @@
           <a class="nav-link" href="<?php echo BASEURL; ?>">Home <span
               class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item" active>
-          <a class="nav-link" href="<?php echo BASEURL; ?>signup.php">Signup</a>
-        </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo BASEURL; ?>login.php">Login</a>
+          <a class="nav-link" href="<?php echo BASEURL; ?>addcontact.php">Add
+            Contact</a>
+        </li>
+        <li class="nav-item dropdown  active">
+          <a class="nav-link dropdown-toggle"
+            href="<?php echo BASEURL; ?>profile.php" id="navbarDropdownMenuLink"
+            role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Pankaj </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item"
+              href="<?php echo BASEURL; ?>profile.php">Profile</a>
+            <a class="dropdown-item"
+              href="<?php echo BASEURL; ?>logout.php">Logout</a>
+          </div>
         </li>
       </ul>
     </div>
