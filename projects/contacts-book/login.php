@@ -22,7 +22,7 @@ include_once "components/login-nav.php";
           <h4 class="card-title mt-2">Sign In</h4>
         </header>
         <article class="card-body">
-          <form method="POST" action="<?php echo BASEURL;?>login_action.php">
+          <form method="POST" action="<?php echo BASEURL; ?>login_action.php">
             <div class="form-group">
               <label>Email</label>
               <input type="email" name="email" class="form-control"
@@ -40,13 +40,13 @@ include_once "components/login-nav.php";
           </form>
         </article>
         <div class="border-top card-body text-center">Haven't an account? <a
-            href="<?php echo BASEURL;?>signup.php">Sign Up</a></div>
+            href="<?php echo BASEURL; ?>signup.php">Sign Up</a></div>
       </div>
     </div>
 
   </div>
 
-  <?php 
- // Footer
- include_once "components/footer.php";
+  <?php
+// Footer
+include_once "components/footer.php";
 ?>
