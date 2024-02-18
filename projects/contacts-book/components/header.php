@@ -18,6 +18,3 @@
 </head>
 
 <body>
-
-  <?php include_once "nav.php";?>
-  <main role="main" class="container">
