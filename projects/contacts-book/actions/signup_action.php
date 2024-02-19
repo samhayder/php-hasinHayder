@@ -4,6 +4,8 @@ session_start();
 
 // Include config
 require_once "../includes/config.php";
+// Include Database file
+require_once "../includes/db.php";
 
 $errors = [];
 
@@ -24,6 +26,18 @@ if ( isset( $_POST ) ) {
         $errors[] = "Email can't be blank.";
     } else if ( !empty( $email ) && !filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
         $errors[] = "Invalid Email Address.";
+    } else if ( !empty( $email ) ) {
+        // check email already exit
+        $conn = db_connect();
+        $emailSql = "SELECT id FROM `user` WHERE `email` = '{$email}'";
+        $emailResult = mysqli_query( $conn, $emailSql );
+        $emailRow = mysqli_num_rows( $emailResult );
+
+        if ( $emailRow > 0 ) {
+            $errors[] = "Email Address already exit.";
+        }
+
+        db_close( $conn );
     }
 
     if ( empty( $password ) ) {
@@ -37,8 +51,20 @@ if ( isset( $_POST ) ) {
         $_SESSION['errors'] = $errors;
         header( 'location:' . BASEURL . 'signup.php' );
         exit();
-    } else {
-        print_arr( $_POST );
+    }
+
+    /* when error is empty */
+    // set password hash Algorithm
+    $passwordHash = password_hash( $password, PASSWORD_DEFAULT );
+
+    $sql = "INSERT INTO `user` (first_name, last_name, email, password) VALUES ('{$firstName}', '{$lastName}', '{$email}', '{$passwordHash}')";
+    $conn = db_connect();
+
+    if ( mysqli_query( $conn, $sql ) ) {
+        db_close( $conn );
+        $message = "You'r register successfully";
+        $_SESSION['success'] = $message;
+        header( 'location:' . BASEURL . 'signup.php' );
     }
 
 }
