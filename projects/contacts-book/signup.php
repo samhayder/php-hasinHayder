@@ -5,6 +5,7 @@ require_once "includes/config.php";
 include_once "components/header.php";
 // Login Nav
 include_once "components/login-nav.php";
+
 ?>
 
 <main role="main" class="container">
@@ -17,12 +18,30 @@ include_once "components/login-nav.php";
   <div class="row justify-content-center wrapper">
     <div class="col-md-6">
 
+      <!-- Show Error Message -->
+      <?php 
+       if (isset($_SESSION['errors'])) {
+        ?>
+      <div class="alert alert-danger">
+        <?php
+          foreach($_SESSION['errors'] as $error) {
+            print "<li>$error</li>";
+          }
+          ?>
+      </div>
+      <?php
+        unset($_SESSION['errors']);
+       }
+      ?>
+      <!-- End of Error Message -->
+
       <div class="card">
         <header class="card-header">
           <h4 class="card-title mt-2">Sign up</h4>
         </header>
         <article class="card-body">
-          <form method="POST" action="<?php echo BASEURL; ?>register.php">
+          <form method="POST"
+            action="<?php echo BASEURL; ?>actions/signup_action.php">
             <div class="form-row">
               <div class="col form-group">
                 <label>First name </label>
