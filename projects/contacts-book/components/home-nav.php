@@ -2,7 +2,7 @@
 // Base Url
 require_once "includes/config.php";
 
-$user = $_SESSION['user'] ? $_SESSION['user'] : [];
+$user = $_SESSION['user'] ?? [];
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -20,13 +20,23 @@ $user = $_SESSION['user'] ? $_SESSION['user'] : [];
           <a class="nav-link" href="<?php echo BASEURL; ?>">Home <span
               class="sr-only">(current)</span></a>
         </li>
+
+        <!-- user not login-> show this li -->
+        <?php if ( empty( $user ) ): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo BASEURL; ?>signup.php">Signup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo BASEURL; ?>login.php">Login</a>
+        </li>
+        <?php endif;?>
+
+        <!-- check user login -> show this li -->
+        <?php if ( !empty( $user ) ): ?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo BASEURL; ?>add-contact.php">Add
             Contact</a>
         </li>
-
-        <!-- check user login -->
-        <?php if ( !empty( $user ) ): ?>
         <li class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle"
             href="<?php echo BASEURL; ?>profile.php" id="navbarDropdownMenuLink"

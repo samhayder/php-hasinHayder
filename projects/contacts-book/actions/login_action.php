@@ -51,12 +51,14 @@ if ( isset( $_POST ) ) {
                     $errors[] = "Password can't be match.";
                     $_SESSION['errors'] = $errors;
                     header( 'location:' . BASEURL . 'login.php' );
+                    exit();
                 }
             }
         } else {
             $errors[] = "Email can't be match.";
             $_SESSION['errors'] = $errors;
             header( 'location:' . BASEURL . 'login.php' );
+            exit();
         }
     }
 
