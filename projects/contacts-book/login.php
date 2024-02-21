@@ -4,7 +4,7 @@ require_once "includes/config.php";
 // Header
 include_once "components/header.php";
 // Login Nav
-include_once "components/login-nav.php";
+include_once "components/nav.php";
 
 ?>
 

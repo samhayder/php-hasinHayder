@@ -4,7 +4,7 @@ include_once "includes/config.php";
 // Header
 include_once "components/header.php";
 // Main Nav
-include_once "components/home-nav.php";
+include_once "components/nav.php";
 ?>
 
 <main role="main" class="container">
