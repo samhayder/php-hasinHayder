@@ -8,3 +8,34 @@ function print_arr( $arr ) {
     print_r( $arr );
     exit();
 }
+
+// Show UI Error Messages
+function errorMsg() {
+    if ( isset( $_SESSION['errors'] ) ) {
+        ?>
+<div class="alert alert-danger">
+  <p>There are following error(s) fund...</p>
+  <?php
+foreach ( $_SESSION['errors'] as $error ) {
+            print "<li>$error</li>";
+        }
+        ?>
+</div>
+<?php
+unset( $_SESSION['errors'] );
+    }
+}
+
+// Show UI Error Messages
+function successMsg() {
+    if ( isset( $_SESSION['success'] ) ) {
+        ?>
+<div class="alert alert-success text-center">
+  <?php echo $_SESSION['success']; ?>
+</div>
+<?php
+unset( $_SESSION['success'] );
+    }
+}
+
+?>

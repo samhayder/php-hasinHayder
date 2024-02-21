@@ -19,34 +19,10 @@ include_once "components/login-nav.php";
     <div class="col-md-6">
 
       <!-- Show Success Message -->
-      <?php
-if ( isset( $_SESSION['success'] ) ) {
-    ?>
-      <div class="alert alert-success text-center">
-        <?php echo $_SESSION['success']; ?>
-      </div>
-      <?php
-unset( $_SESSION['success'] );
-}
-?>
-      <!-- End of Success Message -->
+      <?php successMsg();?>
 
       <!-- Show Error Message -->
-      <?php
-if ( isset( $_SESSION['errors'] ) ) {
-    ?>
-      <div class="alert alert-danger">
-        <?php
-foreach ( $_SESSION['errors'] as $error ) {
-        print "<li>$error</li>";
-    }
-    ?>
-      </div>
-      <?php
-unset( $_SESSION['errors'] );
-}
-?>
-      <!-- End of Error Message -->
+      <?php errorMsg();?>
 
       <div class="card">
         <header class="card-header">

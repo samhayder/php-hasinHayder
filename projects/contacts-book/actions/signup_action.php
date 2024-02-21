@@ -64,7 +64,7 @@ if ( isset( $_POST ) ) {
         db_close( $conn );
         $message = "You'r register successfully";
         $_SESSION['success'] = $message;
-        header( 'location:' . BASEURL . 'signup.php' );
+        header( 'location:' . BASEURL . 'login.php' );
     }
 
 }

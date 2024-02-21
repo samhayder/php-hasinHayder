@@ -1,6 +1,8 @@
 <?php
 // Base Url
 require_once "includes/config.php";
+
+$user = $_SESSION['user'] ? $_SESSION['user'] : [];
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -22,12 +24,18 @@ require_once "includes/config.php";
           <a class="nav-link" href="<?php echo BASEURL; ?>add-contact.php">Add
             Contact</a>
         </li>
+
+        <!-- check user login -->
+        <?php if ( !empty( $user ) ): ?>
         <li class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle"
             href="<?php echo BASEURL; ?>profile.php" id="navbarDropdownMenuLink"
             role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            Pankaj </a>
+            <?php
+echo !empty( $user['first_name'] ) ? ucfirst( $user['first_name'] ) : "Guest";
+?>
+          </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item"
               href="<?php echo BASEURL; ?>profile.php">Profile</a>
@@ -35,6 +43,7 @@ require_once "includes/config.php";
               href="<?php echo BASEURL; ?>logout.php">Logout</a>
           </div>
         </li>
+        <?php endif;?>
       </ul>
     </div>
   </div>
