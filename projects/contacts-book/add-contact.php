@@ -7,16 +7,19 @@ include_once "components/header.php";
 include_once "components/nav.php";
 ?>
 
-<main role="main" class="container">
+<main role="main" class="container py-5">
   <div class="row justify-content-center wrapper">
     <div class="col-md-6">
+      <!-- Show Error Message -->
+      <?php errorMsg();?>
+
       <div class="card">
         <header class="card-header">
           <h4 class="card-title mt-2">Add/Edit Contact</h4>
         </header>
         <article class="card-body">
           <form method="POST"
-            action="<?php echo BASEURL; ?>add-contact_action.php"
+            action="<?php echo BASEURL; ?>actions/add-contact_action.php"
             enctype="multipart/form-data">
             <div class="form-row">
               <div class="col form-group">
