@@ -38,4 +38,41 @@ unset( $_SESSION['success'] );
     }
 }
 
+// Pagination
+function getPagination( $totalRecord, $perPage = 2, $currentPage = 1 ) {
+    $totalPage = ceil( $totalRecord / $perPage ) ?? 0;
+
+    $pagination = '';
+
+    if ( $totalPage > 1 ) {
+        $pagination .= '<nav>
+    <ul class="pagination justify-content-center">';
+
+        $perviousPage = ( $currentPage <= 1 ) ? "disabled" : "";
+        $pagination .= '<li class="page-item  ' . $perviousPage . '">
+        <a class="page-link" href="' . BASEURL . 'index.php?page=' . ( $currentPage - 1 ) . '">Previous</a>
+      </li>';
+
+        for ( $page = 1; $page <= $totalPage; $page++ ) {
+            if ( $page == $currentPage ) {
+                $pagination .= '<li class="page-item active">
+                    <a class="page-link" href="' . BASEURL . 'index.php?page=' . $page . '">' . $page . '</a>
+                </li>';
+            } else {
+                $pagination .= '<li class="page-item">
+                    <a class="page-link" href="' . BASEURL . 'index.php?page=' . $page . '">' . $page . '</a>
+                </li>';
+            }
+        }
+
+        $nextPage = ( $currentPage >= $totalPage ) ? "disabled" : "";
+        $pagination .= '<li class="page-item ' . $nextPage . '">
+        <a class="page-link" href="' . BASEURL . 'index.php?page=' . ( $currentPage + 1 ) . '">Next</a>
+      </li>
+    </ul>
+  </nav>';
+    }
+
+    print $pagination;
+}
 ?>

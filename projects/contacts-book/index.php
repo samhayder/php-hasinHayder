@@ -18,10 +18,18 @@ $userId = $_SESSION['user']['id'] ?? 0;
 successMsg();
 
 if ( $userId > 0 ):
+    $conn = db_connect();
+
+    //Pagination
+    $currentPage = $_GET['page'] ?? 1;
+    $limit = 2;
+    $offset = ( $currentPage - 1 ) * $limit;
+    $paginationSql = "SELECT id FROM `contacts` WHERE `owner_id` = $userId";
+    $paginationResult = mysqli_query( $conn, $paginationSql );
+    $paginationNumRows = mysqli_num_rows( $paginationResult );
 
     // Connect Database
-    $conn = db_connect();
-    $contactSql = "SELECT * FROM `contacts` WHERE `owner_id` = $userId ORDER BY first_name ASC LIMIT 0,10";
+    $contactSql = "SELECT * FROM `contacts` WHERE `owner_id` = $userId ORDER BY first_name ASC LIMIT {$offset},{$limit}";
     $sqlResult = mysqli_query( $conn, $contactSql );
     $contactNumRows = mysqli_num_rows( $sqlResult );
 
@@ -66,23 +74,21 @@ if ( $userId > 0 ):
 	    </tbody>
 	  </table>
 
-	  <nav>
-	    <ul class="pagination justify-content-center">
-	      <li class="page-item  disabled">
-	        <a class="page-link"
-	          href="<?php echo BASEURL; ?>index.php?page=0">Previous</a>
-	      </li>
-	      <li class="page-item active"><a class="page-link"
-	          href="<?php echo BASEURL; ?>index.php?page=1">1</a></li>
-	      <li class="page-item"><a class="page-link"
-	          href="<?php echo BASEURL; ?>index.php?page=2">2</a></li>
+	  <!-- <nav>
+			    <ul class="pagination justify-content-center">
+			      <li class="page-item  disabled">
+			        <a class="page-link" href="">Previous</a>
+			      </li>
+			      <li class="page-item active"><a class="page-link" href="">1</a></li>
+			      <li class="page-item"><a class="page-link" href="">2</a></li>
 
-	      <li class="page-item">
-	        <a class="page-link"
-	          href="<?php echo BASEURL; ?>index.php?page=2">Next</a>
-	      </li>
-	    </ul>
-	  </nav>
+			      <li class="page-item">
+			        <a class="page-link" href="">Next</a>
+			      </li>
+			    </ul>
+			  </nav> -->
+
+	  <?php getPagination( $paginationNumRows, $limit, $currentPage );?>
 	  <?php endif;?>
 
   <?php
