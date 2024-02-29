@@ -22,7 +22,7 @@ if ( $userId > 0 ):
 
     //Pagination
     $currentPage = $_GET['page'] ?? 1;
-    $limit = 2;
+    $limit = 5;
     $offset = ( $currentPage - 1 ) * $limit;
     $paginationSql = "SELECT id FROM `contacts` WHERE `owner_id` = $userId";
     $paginationResult = mysqli_query( $conn, $paginationSql );
@@ -62,9 +62,9 @@ if ( $userId > 0 ):
 	          <?php echo ucfirst( $row['first_name'] ) . " " . ucfirst( $row['last_name'] ); ?>
 	        </td>
 	        <td class="align-middle">
-	          <a href="<?php echo BASEURL; ?>view.php?id=9"
+	          <a href="<?php echo BASEURL . "view.php?id=" . $row['id']; ?>"
 	            class="btn btn-success">View</a>
-	          <a href="<?php echo BASEURL; ?>add-contact.php?id=9"
+	          <a href="<?php echo BASEURL . "add-contact.php?id=" . $row['id']; ?>"
 	            class="btn btn-primary">Edit</a>
 	          <a href="<?php echo BASEURL; ?>delete.php?id=9" class="btn btn-danger"
 	            onclick="return confirm(`Are you sure want to delete this contact?`)">Delete</a>
@@ -75,18 +75,18 @@ if ( $userId > 0 ):
 	  </table>
 
 	  <!-- <nav>
-			    <ul class="pagination justify-content-center">
-			      <li class="page-item  disabled">
-			        <a class="page-link" href="">Previous</a>
-			      </li>
-			      <li class="page-item active"><a class="page-link" href="">1</a></li>
-			      <li class="page-item"><a class="page-link" href="">2</a></li>
+					    <ul class="pagination justify-content-center">
+					      <li class="page-item  disabled">
+					        <a class="page-link" href="">Previous</a>
+					      </li>
+					      <li class="page-item active"><a class="page-link" href="">1</a></li>
+					      <li class="page-item"><a class="page-link" href="">2</a></li>
 
-			      <li class="page-item">
-			        <a class="page-link" href="">Next</a>
-			      </li>
-			    </ul>
-			  </nav> -->
+					      <li class="page-item">
+					        <a class="page-link" href="">Next</a>
+					      </li>
+					    </ul>
+					  </nav> -->
 
 	  <?php getPagination( $paginationNumRows, $limit, $currentPage );?>
 	  <?php endif;?>

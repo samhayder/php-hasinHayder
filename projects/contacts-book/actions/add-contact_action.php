@@ -16,6 +16,7 @@ $email = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS )
 $phone = filter_input( INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 $address = filter_input( INPUT_POST, 'address', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 $photoFile = $_FILES['photo'] ?? [];
+$contactId = $_POST['contactid'] ?? '';
 
 if ( isset( $_POST ) && !empty( $_SESSION['user'] ) ) {
     // Input Validation
@@ -72,11 +73,28 @@ if ( isset( $_POST ) && !empty( $_SESSION['user'] ) ) {
     /* Connect Database */
     $ownerId = $_SESSION['user']['id'] ?? 0;
     $conn = db_connect();
-    $sql = "INSERT INTO `contacts` (first_name, last_name, email, phone, address, photo, owner_id) VALUES ('{$firstName}', '{$lastName}', '{$email}', '{$phone}', '{$address}', '{$photoName}', '{$ownerId}')";
+
+    // Contact create & update
+    if ( !empty( $contactId ) ) {
+        // Updated exiting contact
+        if ( !empty( $photoName ) ) {
+            $sql = "UPDATE `contacts` SET first_name = '{$firstName}', last_name = '{$lastName}', email = '{$email}', phone = '{$phone}', address = '{$address}', photo = '{$photoName}' WHERE id={$contactId} AND owner_id ={$ownerId}";
+        } else {
+            $sql = "UPDATE `contacts` SET first_name = '{$firstName}', last_name = '{$lastName}', email = '{$email}', phone = '{$phone}', address = '{$address}' WHERE id={$contactId} AND owner_id ={$ownerId}";
+        }
+
+        $message = "Contact hsa been updated successfully.";
+
+    } else {
+        // add new contact
+        $sql = "INSERT INTO `contacts` (first_name, last_name, email, phone, address, photo, owner_id) VALUES ('{$firstName}', '{$lastName}', '{$email}', '{$phone}', '{$address}', '{$photoName}', '{$ownerId}')";
+
+        $message = "New contact hsa been successfully added.";
+    }
 
     if ( mysqli_query( $conn, $sql ) ) {
         db_close( $conn );
-        $message = "New contact hsa been successfully added.";
+
         $_SESSION['success'] = $message;
         header( 'location:' . BASEURL );
         exit();
