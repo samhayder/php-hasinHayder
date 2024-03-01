@@ -30,20 +30,20 @@ function factorial( int $n ) {
 echo "Factorial \n" . factorial( 5 );
 
 // Default Parameter set
-function serve($foodType = "Coffee", $numberOfItem = "1 Cup") {
-   echo "$numberOfItem $foodType has/have been served \n";
+function serve( $foodType = "Coffee", $numberOfItem = "1 Cup" ) {
+    echo "$numberOfItem $foodType has/have been served \n";
 }
 serve();
-serve("Salad", "2 Plates");
+serve( "Salad", "2 Plates" );
 
 // Accept unlimited Argument
-function sum ( ...$numbers):int {
-   $result = 0;
+function sum( ...$numbers ): int {
+    $result = 0;
 
-   for ($i = 0; $i < count($numbers); $i++) {
-      $result += $numbers[$i];
-   }
-   return $result;
+    for ( $i = 0; $i < count( $numbers ); $i++ ) {
+        $result += $numbers[$i];
+    }
+    return $result;
 }
 
-echo sum(2,4,5);
+echo sum( 2, 4, 5 );
