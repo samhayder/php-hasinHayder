@@ -17,7 +17,7 @@ $userId = $_SESSION['user']['id'] ?? 0;
 //Show Success Message
 successMsg();
 
-if ( $userId > 0 ):
+if ( $userId > 0 ) {
     $conn = db_connect();
 
     //Pagination
@@ -33,9 +33,9 @@ if ( $userId > 0 ):
     $sqlResult = mysqli_query( $conn, $contactSql );
     $contactNumRows = mysqli_num_rows( $sqlResult );
 
-    if ( $contactNumRows > 0 ):
+    if ( $contactNumRows > 0 ) {
 
-    ?>
+        ?>
 
   <table class="table text-center">
     <thead>
@@ -48,10 +48,10 @@ if ( $userId > 0 ):
     <tbody>
 
       <?php
-    while ( $row = mysqli_fetch_assoc( $sqlResult ) ) {
+while ( $row = mysqli_fetch_assoc( $sqlResult ) ) {
 
-        $userImage = BASEURL . "uploads/photos/" . $row['photo'] ?? "https://via.placeholder.com/50.png/09f/666";
-        ?>
+            $userImage = BASEURL . "uploads/photos/" . $row['photo'] ?? "https://via.placeholder.com/50.png/09f/666";
+            ?>
 
       <tr>
         <td class="align-middle">
@@ -66,7 +66,7 @@ if ( $userId > 0 ):
             class="btn btn-success">View</a>
           <a href="<?php echo BASEURL . "add-contact.php?id=" . $row['id']; ?>"
             class="btn btn-primary">Edit</a>
-          <a href="<?php echo BASEURL . "delete.php?id=" . $row['id'];?>"
+          <a href="<?php echo BASEURL . "delete.php?id=" . $row['id']; ?>"
             class="btn btn-danger"
             onclick="return confirm(`Are you sure want to delete this contact?`)">Delete</a>
         </td>
@@ -90,10 +90,21 @@ if ( $userId > 0 ):
 					  </nav> -->
 
   <?php getPagination( $paginationNumRows, $limit, $currentPage );?>
-  <?php endif;?>
-
   <?php
-endif;
+}
+} else {
+    ?>
+  <style>
+  body {
+    background-image: url("<?php echo BASEURL . "public/images/contactbook.jpg"; ?>");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  </style>
+  <?php
+}
+
 // Footer
 include_once "components/footer.php";
 ?>
